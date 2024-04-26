@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{url('')}}/public/assets/storage/images/favicon.png" type="image/png">
-    <title>Verify Asap</title>
+    <title>TWB NUMBERS</title>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -756,7 +756,7 @@
             <meta name="keywords"
                 content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
             <meta name="author" content="elemis">
-            <title>Verify Asap | SMS Verification Website.</title>
+            <title>TWB NUMBERS | SMS Verification Website.</title>
             <link rel="shortcut icon" href="{{url('')}}/public/assets/img/favicon.png">
             <link rel="stylesheet" href="{{url('')}}/public/assets/css/plugins.css">
             <link rel="stylesheet" href="{{url('')}}/public/assets/css/style.css">
@@ -1010,7 +1010,7 @@
                         <div class="col-md-4 col-lg-3">
                             <div class="widget">
                                 <img class="mb-4" src="{{url('')}}/public/assets/img/logo.png" alt="">
-                                <p class="mb-4">© 2024 Verify Asap. <br class="d-none d-lg-block">All rights reserved.
+                                <p class="mb-4">© 2024 TWB NUMBERS. <br class="d-none d-lg-block">All rights reserved.
                                 </p>
                                 <nav class="nav social ">
                                     <a href="#"><i class="uil uil-twitter"></i></a>
