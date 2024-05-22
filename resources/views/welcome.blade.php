@@ -59,6 +59,9 @@
                 </div>
             </div>
 
+
+
+
         @else
 
             <div class="navbar-end hidden sm:flex">
