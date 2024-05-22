@@ -29,7 +29,7 @@
 
                 @auth
                     <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/home">Dashboard</a></li>
                         <li><a href="/log-out">Log Out </a></li>
                     </ul>
 
@@ -54,7 +54,7 @@
         @auth
             <div class="navbar-end hidden sm:flex">
                 <div>
-                    <a class="btn btn-dark mr-2" href="/dashboard">Dashboard</a>
+                    <a class="btn btn-dark mr-2" href="/home">Dashboard</a>
                     <a class="btn btn-outline" href="/log-out">Log Out</a>
                 </div>
             </div>
@@ -84,8 +84,7 @@
                 Reclaim your privacy. Get 2FA codes without giving your personal information to any service.
             </div>
             @auth
-                <a href="/dashboard" class="btn btn-dark">Get Started</a>
-
+                <a href="/home" class="btn btn-dark">Get Started</a>
             @else
                 <a href="/register" class="btn btn-dark">Get Started</a>
             @endauth

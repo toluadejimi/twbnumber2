@@ -50,11 +50,21 @@ class HomeController extends Controller
     }
 
 
+    public function pendng_sms(Request $request)
+    {
+
+        return view('receive-sms');
+
+    }
 
 
     public function order_now(Request $request)
     {
 
+
+        if (Auth::user()->wallet < $request->price) {
+            return back()->with('error', "Insufficient Funds");
+        }
 
         if (Auth::user()->wallet < $request->price) {
             return back()->with('error', "Insufficient Funds");
@@ -73,6 +83,20 @@ class HomeController extends Controller
 
         //dd($order);
 
+        if ($order == 9) {
+
+            $ver = Verification::where('status', 1)->first() ?? null;
+            if($ver != null){
+
+                $data['sms_order'] = $ver;
+                $data['order'] = 1;
+
+                return view('receivesms', $data);
+
+            }
+            return redirect('home');
+        }
+
         if ($order == 0) {
             User::where('id', Auth::id())->increment('wallet', $request->price);
             return redirect('home')->with('error', 'Number Currently out of stock, Please check back later');
@@ -82,7 +106,7 @@ class HomeController extends Controller
             User::where('id', Auth::id())->increment('wallet', $request->price);
             $message = "TWBNUMBER | Low balance";
             send_notification($message);
-            
+
 
             return redirect('home')->with('error', 'Error occurred, Please try again');
         }
@@ -91,7 +115,7 @@ class HomeController extends Controller
             User::where('id', Auth::id())->increment('wallet', $request->price);
             $message = "TWBNUMBER | Error";
             send_notification($message);
-            
+
 
             return redirect('home')->with('error', 'Error occurred, Please try again');
         }
@@ -121,7 +145,7 @@ class HomeController extends Controller
         return view('receivesms', $data);
 
     }
-    
+
 
 
 
@@ -134,7 +158,7 @@ class HomeController extends Controller
 
         $order = Verification::where('id', $request->id)->first() ?? null;
 
-      
+
 
 
         if ($order == null) {
@@ -293,7 +317,7 @@ class HomeController extends Controller
 
             $message = Auth::user()->email . "| wants to fund |  NGN " . number_format($request->amount) . " | with ref | $ref |  on TWBNUMBER";
             send_notification2($message);
-            
+
 
             return Redirect::to($url);
         }
@@ -329,7 +353,7 @@ class HomeController extends Controller
 
             $message = Auth::user()->email . "| wants to fund Manually |  NGN " . number_format($request->amount) . " | with ref | $ref |  on TWBNUMBER";
             send_notification2($message);
-            
+
 
 
 
@@ -344,7 +368,7 @@ class HomeController extends Controller
 
 
 
-      
+
     }
 
 
@@ -459,7 +483,7 @@ class HomeController extends Controller
 
             $message =  Auth::user()->email . "| just funded NGN" . number_format($request->amount, 2) . " on Log market";
             send_notification($message);
-            
+
 
 
 
@@ -616,7 +640,7 @@ class HomeController extends Controller
 
             $message = Auth::user()->email . "is trying to reslove from deleted transaction on TWBNUMBER";
             send_notification2($message);
-            
+
 
 
 
@@ -633,7 +657,7 @@ class HomeController extends Controller
 
             $message = Auth::user()->email . "is trying to steal hits the endpoint twice on TWBNUMBER";
             send_notification2($message);
-            
+
 
 
 
@@ -668,7 +692,7 @@ class HomeController extends Controller
 
             $message = Auth::user()->email . "| just resolved with $request->session_id | NGN " . number_format($amount) . " on TWBNUMBER";
             send_notification2($message);
-            
+
 
 
 
@@ -884,7 +908,7 @@ class HomeController extends Controller
 
             $message =  "$email | TWBNUMBER  | is trying to fund and a successful order with orderid $request->trx_ref";
             send_notification($message);
-            
+
 
 
 
@@ -906,7 +930,7 @@ class HomeController extends Controller
 
             $message =  "$email | TWBNUMBER | is trying to fund and a successful order with orderid $request->trx_ref";
             send_notification($message);
-            
+
 
 
 
@@ -922,7 +946,7 @@ class HomeController extends Controller
 
             $message =  "$email | TWBNUMBER | is trying to fund and a successful order with orderid $request->trx_ref";
             send_notification($message);
-            
+
 
 
 
@@ -941,7 +965,7 @@ class HomeController extends Controller
 
             $message =  "$email | TWBNUMBER | is trying to fund and a successful order with orderid $request->trx_ref";
             send_notification($message);
-            
+
 
 
 
@@ -1002,7 +1026,7 @@ class HomeController extends Controller
                 $message = "$user_email | $request->trx_ref | $session_id | $var->amount | just resolved deposit | TWBNUMBER";
                 send_notification($message);
                 send_notification2($message);
-                
+
 
 
 
@@ -1045,7 +1069,7 @@ class HomeController extends Controller
         }
     }
 
-    
+
 
     public function webhook(request $request)
     {

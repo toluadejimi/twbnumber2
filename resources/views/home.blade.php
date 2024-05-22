@@ -38,7 +38,7 @@
 
         <div class="row mt-5">
 
-    
+
 
             <div class="col-lg-5 col-sm-12">
                 <div class="card border-0 shadow-lg p-3 mb-5 bg-body rounded-40">
@@ -81,10 +81,24 @@
                                         </div>
 
                                         <div class="col">
-                                            <a
-                                                href="/order-now?service={{ $key }}&price={{ $cost }}&cost={{ $innerValue->cost }}&name={{ $innerValue->name }}">
+                                            <a class="myButton" onclick="hideButton(this)"
+                                               href="/order-now?service={{ $key }}&price={{ $cost }}&cost={{ $innerValue->cost }}&name={{ $innerValue->name }}">
                                                 <i class="fa fa-shopping-bag"></i>
                                             </a>
+
+
+                                            <script>
+                                                function hideButton(link) {
+                                                    // Hide the clicked link
+                                                    link.style.display = 'none';
+
+                                                    setTimeout(function() {
+                                                        link.style.display = 'inline'; // or 'block' depending on your layout
+                                                    }, 5000); // 5 seconds
+                                                }
+                                            </script>
+
+
                                         </div>
 
 
@@ -230,7 +244,6 @@
             }
         }
     </script>
-
 
 
 

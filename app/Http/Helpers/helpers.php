@@ -183,6 +183,13 @@ function get_services(){
 
 function create_order($service, $price, $cost, $service_name){
 
+
+    $verification = Verification::where('user_id', Auth::id())->where('status', 1)->first() ?? null;
+
+    if($verification != null || $verification == 1){
+        return 9;
+    }
+
    $APIKEY = env('KEY');
    $curl = curl_init();
 
@@ -251,7 +258,7 @@ function cancel_order($orderID){
     $var = curl_exec($curl);
     curl_close($curl);
     $result = $var ?? null;
-    
+
     if(strstr($result, "ACCESS_CANCEL") !== false){
 
         return 1;
@@ -262,7 +269,7 @@ function cancel_order($orderID){
 
     }
 
-    
+
 
 
 }
@@ -288,7 +295,7 @@ function check_sms($orderID){
     $var = curl_exec($curl);
     curl_close($curl);
     $result = $var ?? null;
-    
+
     if(strstr($result, "NO_ACTIVATION") !== false){
 
         return 1;
@@ -314,7 +321,7 @@ function check_sms($orderID){
     }
 
 
-    
+
 
     if(strstr($result, "STATUS_OK") !== false) {
 
